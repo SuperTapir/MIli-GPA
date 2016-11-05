@@ -12,6 +12,7 @@
 
 <body>
     <div class="container" id="main-page">
+        <h1>GPA计算 <span class="small">v1.3</span></h1>
         <form id='gpa-body'>
             <div class="row text-center">
                 <div class="col-xs-6">
@@ -26,25 +27,65 @@
             </div>
             <div class="row" id="gpa-input">
                 <div class="col-xs-6" id="col-class-name">
-                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;1">
-                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;2">
-                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;3">
-                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;4">
-                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;5">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;1">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;2">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;3">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;4">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;5">
+                    </div>
                 </div>
                 <div class="col-xs-3" id="col-point">
-                    <input type="text" class="form-control input-sm">
-                    <input type="text" class="form-control input-sm">
-                    <input type="text" class="form-control input-sm">
-                    <input type="text" class="form-control input-sm">
-                    <input type="text" class="form-control input-sm">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
                 </div>
                 <div class="col-xs-3" id="col-credit">
-                    <input type="text" class="form-control input-sm">
-                    <input type="text" class="form-control input-sm">
-                    <input type="text" class="form-control input-sm">
-                    <input type="text" class="form-control input-sm">
-                    <input type="text" class="form-control input-sm">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control input-sm">
+                        <span></span>
+                    </div>
                 </div>
             </div>
             <hr>
@@ -57,25 +98,27 @@
             <button type="reset" class="btn btn-danger btn-block">
                 <i class="fa fa-repeat"></i>&nbsp;&nbsp;&#x6E05;&#x7A7A;&#x7ED3;&#x679C;
             </button>
+            <hr>
+            <h4 class="small text-center">© 2003-2016 MILIER, All Rights Reserved.京ICP证030173号</h4>
         </form>
-        <div class="modal fade" id="calculateAnswear">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title">&#x67E5;&#x8BE2;&#x6210;&#x529F;</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">&#x6211;&#x77E5;&#x9053;&#x4E86;</button>
-                    </div>
+    </div>
+    <div class="modal fade" id="calculateAnswear">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">&#x67E5;&#x8BE2;&#x6210;&#x529F;</h4>
                 </div>
-                <!-- /.modal-content -->
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">&#x6211;&#x77E5;&#x9053;&#x4E86;</button>
+                </div>
             </div>
-            <!-- /.modal-dialog -->
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
     <script src="js/jquery-3.1.1.min.js"></script>

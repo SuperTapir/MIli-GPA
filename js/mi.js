@@ -13,16 +13,16 @@ window.onload = function() {
 }
 
 function addNewItem() {
-    var item1 = document.createElement('input');
-    item1.type = 'text';
-    item1.className = 'form-control input-sm';
-    item1.placeholder = '课程' + (parseInt(colClassName.lastElementChild.placeholder.substr(-1, 1)) + 1)
-    var item2 = document.createElement('input');
-    item2.type = 'text';
-    item2.className = 'form-control input-sm';
-    var item3 = document.createElement('input');
-    item3.type = 'text';
-    item3.className = 'form-control input-sm';
+    var item1Str = colClassName.lastElementChild.firstElementChild.placeholder.substr(-1, 1);
+    var item1 = document.createElement('div');
+    item1.className = 'form-group has-feedback';
+    item1.innerHTML = '<input type="text" class="form-control input-sm"' + 'placeholder="&#x8BFE;&#x7A0B;' + (parseInt(item1Str) + 1) + '">';
+    var item2 = document.createElement('div');
+    item2.className = 'form-group has-feedback';
+    item2.innerHTML = '<input type="text" class="form-control input-sm"><span></span>';
+    var item3 = document.createElement('div');
+    item3.className = 'form-group has-feedback';
+    item3.innerHTML = '<input type="text" class="form-control input-sm"><span></span>';
     colClassName.appendChild(item1);
     colPoint.appendChild(item2);
     colCredit.appendChild(item3);
@@ -78,7 +78,11 @@ function testPointInput(event) {
     //在这里是实际绑定的事件
     if (target.nodeName == "INPUT") {
         if (isNaN(parseInt(target.value)) || target.value < 0 || target.value > 100) {
-            target.value = '错误';
+            target.parentElement.className = 'form-group has-error has-feedback';
+            target.parentElement.lastElementChild.className = 'glyphicon glyphicon-remove form-control-feedback';
+        } else {
+            target.parentElement.className = 'form-group has-feedback';
+            target.parentElement.lastElementChild.className = '';
         }
     }
 }
@@ -89,7 +93,11 @@ function testCreditInput(event) {
     //在这里是实际绑定的事件
     if (target.nodeName == "INPUT") {
         if (isNaN(parseInt(target.value)) || target.value < 0 || target.value > 10) {
-            target.value = '错误';
+            target.parentElement.className = 'form-group has-error has-feedback';
+            target.parentElement.lastElementChild.className = 'glyphicon glyphicon-remove form-control-feedback';
+        } else {
+            target.parentElement.className = 'form-group has-feedback';
+            target.parentElement.lastElementChild.className = '';
         }
     }
 }
