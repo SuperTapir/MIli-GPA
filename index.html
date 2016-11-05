@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/mi-p2.css">
+    <title>GPA</title>
+</head>
+
+<body>
+    <div class="container" id="main-page">
+        <form id='gpa-body'>
+            <div class="row text-center">
+                <div class="col-xs-6">
+                    <h5>&#x8BFE;&#x7A0B;&#x540D;&#x79F0;</h5>
+                </div>
+                <div class="col-xs-3">
+                    <h5>&#x6210;&#x7EE9;</h5>
+                </div>
+                <div class="col-xs-3">
+                    <h5>&#x8BFE;&#x7A0B;&#x5B66;&#x5206;</h5>
+                </div>
+            </div>
+            <div class="row" id="gpa-input">
+                <div class="col-xs-6" id="col-class-name">
+                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;1">
+                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;2">
+                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;3">
+                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;4">
+                    <input type="text" class="form-control input-sm" placeholder="&#x8BFE;&#x7A0B;5">
+                </div>
+                <div class="col-xs-3" id="col-point">
+                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm">
+                </div>
+                <div class="col-xs-3" id="col-credit">
+                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm">
+                </div>
+            </div>
+            <hr>
+            <button class="btn btn-success btn-block" id="add-new-btn">
+                <i class="fa fa-plus-square"></i>&nbsp;&nbsp;&#x65B0;&#x589E;&#x8BFE;&#x7A0B;
+            </button>
+            <button class="btn btn-primary btn-block" id="calculate-btn">
+                <i class="fa fa-calculator"></i>&nbsp;&nbsp;&#x5F00;&#x59CB;&#x8BA1;&#x7B97;
+            </button>
+            <button type="reset" class="btn btn-danger btn-block">
+                <i class="fa fa-repeat"></i>&nbsp;&nbsp;&#x6E05;&#x7A7A;&#x7ED3;&#x679C;
+            </button>
+        </form>
+        <div class="modal fade" id="calculateAnswear">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">&#x67E5;&#x8BE2;&#x6210;&#x529F;</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">&#x6211;&#x77E5;&#x9053;&#x4E86;</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+    <!-- /.modal -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/mi.js"></script>
+</body>
+
+</html>
