@@ -15,7 +15,7 @@ window.onload = function() {
     resetBtn.addEventListener('click', resetItem, false);
     questionBtn.addEventListener('click', questionAnswerModel, false);
     calculateBtn.addEventListener('click', calculateGPA, false);
-    connectBtn.addEventListener('click',connectWithMeModel,false);
+    connectBtn.addEventListener('click', connectWithMeModel, false);
     colPoint.addEventListener('focusout', testPointInput, false);
     colCredit.addEventListener('focusout', testCreditInput, false);
 }
@@ -163,7 +163,7 @@ function calculateGPA(event) {
     var pointArr = getPointArr();
     var creditArr = getCreditArr();
     for (i = 0; i < colClassName.children.length; i++) {
-        if (isNaN(parseInt(pointArr[i])) || isNaN(parseInt(creditArr[i]))) {
+        if (colPoint.children[i].className.indexOf('has-error') != -1 || isNaN(parseInt(pointArr[i])) || isNaN(parseInt(creditArr[i]))) {
             flag = 0;
             break;
         }
