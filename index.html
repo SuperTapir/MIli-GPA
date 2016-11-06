@@ -12,7 +12,7 @@
 
 <body>
     <div class="container" id="main-page">
-        <h1>GPA计算 <span class="small">v1.3.2</span></h1>
+        <h1>GPA计算 <span class="small">v1.4</span></h1>
         <form id='gpa-body'>
             <div class="row text-center">
                 <div class="col-xs-4">
@@ -89,13 +89,22 @@
                 </div>
             </div>
             <hr>
-            <button class="btn btn-success btn-block" id="add-new-btn">
-                <i class="fa fa-plus-square"></i>&nbsp;&nbsp;&#x65B0;&#x589E;&#x8BFE;&#x7A0B;
-            </button>
-            <button class="btn btn-primary btn-block" id="calculate-btn">
+            <button class="btn btn-success btn-block" id="calculate-btn">
                 <i class="fa fa-calculator"></i>&nbsp;&nbsp;&#x5F00;&#x59CB;&#x8BA1;&#x7B97;
             </button>
-            <button type="reset" class="btn btn-danger btn-block">
+            <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+                <div class="col-xs-6">
+                    <button class="btn btn-primary btn-block" id="add-new-btn">
+                        <i class="fa fa-plus-square"></i>&nbsp;&nbsp;&#x65B0;&#x589E;一项
+                    </button>
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-warning btn-block" id="delete-a-btn">
+                        <i class="fa fa-minus-square"></i>&nbsp;&nbsp;减去一项
+                    </button>
+                </div>
+            </div>
+            <button type="reset" class="btn btn-danger btn-block" id="reset-btn">
                 <i class="fa fa-repeat"></i>&nbsp;&nbsp;&#x6E05;&#x7A7A;&#x7ED3;&#x679C;
             </button>
             <hr>

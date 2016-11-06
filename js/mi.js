@@ -3,16 +3,24 @@ var colPoint = document.querySelector('#col-point');
 var colCredit = document.querySelector('#col-credit');
 var calculateBtn = document.querySelector('#calculate-btn');
 var addNewBtn = document.querySelector('#add-new-btn');
+var deleteBtn = document.querySelector('#delete-a-btn');
+var resetBtn = document.querySelector('#reset-btn');
 var answearModel = document.querySelector('#calculateAnswear .modal-body p');
 var titleModel = document.querySelector('#calculateAnswear .modal-title');
 window.onload = function() {
     addNewBtn.addEventListener('click', addNewItem, false);
+    deleteBtn.addEventListener('click', removeItem, false);
+    resetBtn.addEventListener('click', resetItem, false);
     calculateBtn.addEventListener('click', calculateGPA, false);
     colPoint.addEventListener('focusout', testPointInput, false);
     colCredit.addEventListener('focusout', testCreditInput, false);
 }
 
 function addNewItem() {
+    event.preventDefault();
+    if (deleteBtn.hasAttribute('disabled')) {
+        deleteBtn.removeAttribute('disabled');
+    }
     var item1Str = colClassName.lastElementChild.firstElementChild.placeholder.substr(-1, 1);
     var item1 = document.createElement('div');
     item1.className = 'form-group has-feedback';
@@ -26,7 +34,28 @@ function addNewItem() {
     colClassName.appendChild(item1);
     colPoint.appendChild(item2);
     colCredit.appendChild(item3);
+}
+
+function removeItem(event) {
     event.preventDefault();
+    colClassName.removeChild(colClassName.lastElementChild);
+    colPoint.removeChild(colPoint.lastElementChild);
+    colCredit.removeChild(colCredit.lastElementChild);
+    if (colClassName.children.length === 1) {
+        deleteBtn.disabled = 'disabled';
+    }
+}
+
+function resetItem(event) {
+    var pointDomArr = document.querySelectorAll('#col-point input');
+    var creditDomArr = document.querySelectorAll('#col-credit input');
+    for (var i = 0; i < colClassName.children.length; i++) {
+        pointDomArr[i].parentElement.className = 'form-group has-feedback';
+        pointDomArr[i].parentElement.lastElementChild.className = '';
+        creditDomArr[i].parentElement.className = 'form-group has-feedback';
+        creditDomArr[i].parentElement.lastElementChild.className = '';
+
+    }
 }
 
 function getGpaFromPoint(point) {
