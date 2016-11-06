@@ -5,13 +5,17 @@ var calculateBtn = document.querySelector('#calculate-btn');
 var addNewBtn = document.querySelector('#add-new-btn');
 var deleteBtn = document.querySelector('#delete-a-btn');
 var resetBtn = document.querySelector('#reset-btn');
-var answearModel = document.querySelector('#calculateAnswear .modal-body p');
-var titleModel = document.querySelector('#calculateAnswear .modal-title');
+var questionBtn = document.querySelector('#question-btn');
+var connectBtn = document.querySelector('#connect-with-me');
+var answerModel = document.querySelector('#calculateAnswer .modal-body p');
+var titleModel = document.querySelector('#calculateAnswer .modal-title');
 window.onload = function() {
     addNewBtn.addEventListener('click', addNewItem, false);
     deleteBtn.addEventListener('click', removeItem, false);
     resetBtn.addEventListener('click', resetItem, false);
+    questionBtn.addEventListener('click', questionAnswerModel, false);
     calculateBtn.addEventListener('click', calculateGPA, false);
+    connectBtn.addEventListener('click',connectWithMeModel,false);
     colPoint.addEventListener('focusout', testPointInput, false);
     colCredit.addEventListener('focusout', testCreditInput, false);
 }
@@ -168,10 +172,20 @@ function calculateGPA(event) {
     }
     if (flag == 0 || isNaN(((up / down).toFixed(2)))) {
         titleModel.innerHTML = '查询失败';
-        answearModel.innerHTML = '请检查您的数据的有效性';
+        answerModel.innerHTML = '请检查您的数据的有效性';
     } else {
         titleModel.innerHTML = '查询成功';
-        answearModel.innerHTML = '您的平均学分绩点为' + ((up / down).toFixed(2));
+        answerModel.innerHTML = '您的平均学分绩点为' + ((up / down).toFixed(2));
     }
-    $('#calculateAnswear').modal('show');
+    $('#calculateAnswer').modal('show');
+}
+
+function questionAnswerModel(event) {
+    event.preventDefault();
+    $('#questionAnswer').modal('show');
+}
+
+function connectWithMeModel(event) {
+    event.preventDefault();
+    $('#connectAnswer').modal('show');
 }

@@ -12,7 +12,7 @@
 
 <body>
     <div class="container" id="main-page">
-        <h1>GPA计算 <span class="small">v1.4</span></h1>
+        <h1>GPA&#x8BA1;&#x7B97; <span class="small">v2.0</span></h1>
         <form id='gpa-body'>
             <div class="row text-center">
                 <div class="col-xs-4">
@@ -88,6 +88,7 @@
                     </div>
                 </div>
             </div>
+            <a href="#" class="pull-right" id='question-btn'><i class="fa fa-question-circle"></i>有疑问</a>
             <hr>
             <button class="btn btn-success btn-block" id="calculate-btn">
                 <i class="fa fa-calculator"></i>&nbsp;&nbsp;&#x5F00;&#x59CB;&#x8BA1;&#x7B97;
@@ -95,12 +96,12 @@
             <div class="row" style="margin-top: 5px; margin-bottom: 5px">
                 <div class="col-xs-6">
                     <button class="btn btn-primary btn-block" id="add-new-btn">
-                        <i class="fa fa-plus-square"></i>&nbsp;&nbsp;&#x65B0;&#x589E;一项
+                        <i class="fa fa-plus-square"></i>&nbsp;&nbsp;&#x65B0;&#x589E;&#x4E00;&#x9879;
                     </button>
                 </div>
                 <div class="col-xs-6">
                     <button class="btn btn-warning btn-block" id="delete-a-btn">
-                        <i class="fa fa-minus-square"></i>&nbsp;&nbsp;减去一项
+                        <i class="fa fa-minus-square"></i>&nbsp;&nbsp;&#x51CF;&#x53BB;&#x4E00;&#x9879;
                     </button>
                 </div>
             </div>
@@ -108,10 +109,11 @@
                 <i class="fa fa-repeat"></i>&nbsp;&nbsp;&#x6E05;&#x7A7A;&#x7ED3;&#x679C;
             </button>
             <hr>
-            <h4 class="small text-center">© 2003-2016 MILIER, All Rights Reserved.京ICP证030173号</h4>
+            <h4 class="small text-center">蒙ICP备16004984号 | <a href="#" id="connect-with-me">联系开发者</a></h4>
+            <h4 class="small text-center">内蒙古财经大学 | 米粒校园服务平台 | 技术部</h4>
         </form>
     </div>
-    <div class="modal fade" id="calculateAnswear">
+    <div class="modal fade" id="calculateAnswer">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,6 +122,103 @@
                 </div>
                 <div class="modal-body">
                     <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">&#x6211;&#x77E5;&#x9053;&#x4E86;</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <div class="modal fade" id="questionAnswer">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">帮助信息</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="img/mathML.png" alt="" class="img-responsive">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>成绩</th>
+                                <th>绩点</th>
+                            </tr>
+                            <tr>
+                                <td>90—100</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>85—89.9</td>
+                                <td>3.7</td>
+                            </tr>
+                            <tr>
+                                <td>82—84.9</td>
+                                <td>3.3</td>
+                            </tr>
+                            <tr>
+                                <td>78—81.9</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>75—77.9</td>
+                                <td>2.7</td>
+                            </tr>
+                            <tr>
+                                <td>72—74.9</td>
+                                <td>2.3</td>
+                            </tr>
+                            <tr>
+                                <td>68—71.9</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>66—67.9</td>
+                                <td>1.7</td>
+                            </tr>
+                            <tr>
+                                <td>64—65.9</td>
+                                <td>1.5</td>
+                            </tr>
+                            <tr>
+                                <td>60—63.9</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>60分以下</td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p>公式依据按照内蒙古财经大学学生手册，同学们发现问题欢迎指正</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">&#x6211;&#x77E5;&#x9053;&#x4E86;</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <div class="modal fade" id="connectAnswer">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">反馈</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>你好，我的朋友</h4> 本程序是一个开源项目,它现在托管在 <i class="fa fa-github"></i> Github上 <br>如果你找到了BUG或者有什么建议,请及时反应给我,这里是我的联系方式：<br>
+                    <img src="img/myQRCode.jpg" class="img-responsive" alt="">
+                    <hr>
+                    如果你也是一位开发者,我很愿意和你一同开发这个项目,你可已在本项目上给我 Pull Request
+                    <br>
+                    <a href="https://github.com/HelloWorldLKL/MIli-GPA" target="_blank">HelloWorldLKL/MIli-GPA</a>
+                    <br>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">&#x6211;&#x77E5;&#x9053;&#x4E86;</button>
