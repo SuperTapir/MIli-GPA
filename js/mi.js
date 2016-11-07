@@ -139,7 +139,11 @@ function getCreditArr() {
     var creditInput = document.querySelectorAll('#col-credit input');
     var arr = [];
     for (var i = 0; i < creditInput.length; i++) {
-        arr.push(parseInt(creditInput[i].value, 10));
+        if (creditInput[i].value === '') {
+            arr.push(undefined);
+        } else {
+            arr.push(parseInt(creditInput[i].value, 10));
+        }
     }
     return arr;
 }
@@ -148,7 +152,11 @@ function getPointArr() {
     var pointInput = document.querySelectorAll('#col-point input');
     var arr = [];
     for (var i = 0; i < pointInput.length; i++) {
-        arr.push(parseInt(pointInput[i].value, 10));
+        if (pointInput[i].value === '') {
+            arr.push(undefined);
+        } else {
+            arr.push(parseInt(pointInput[i].value, 10));
+        }
     }
     return arr;
 
@@ -163,7 +171,10 @@ function calculateGPA(event) {
     var pointArr = getPointArr();
     var creditArr = getCreditArr();
     for (i = 0; i < colClassName.children.length; i++) {
-        if (colPoint.children[i].className.indexOf('has-error') != -1 || isNaN(parseInt(pointArr[i])) || isNaN(parseInt(creditArr[i]))) {
+        if(pointArr[i]==undefined && creditArr[i]==undefined){
+            continue;
+        }
+        if (colPoint.children[i].className.indexOf('has-error') !== -1 || colCredit.children[i].className.indexOf('has-error') !== -1) {
             flag = 0;
             break;
         }
