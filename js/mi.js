@@ -25,7 +25,7 @@ function addNewItem() {
     if (deleteBtn.hasAttribute('disabled')) {
         deleteBtn.removeAttribute('disabled');
     }
-    var item1Str = colClassName.lastElementChild.firstElementChild.placeholder.substr(-1, 1);
+    var item1Str = colClassName.lastElementChild.firstElementChild.placeholder.substr(2);
     var item1 = document.createElement('div');
     item1.className = 'form-group has-feedback';
     item1.innerHTML = '<input type="text" class="form-control input-sm"' + 'placeholder="&#x8BFE;&#x7A0B;' + (parseInt(item1Str) + 1) + '">';
