@@ -2,7 +2,7 @@
 
 ## MIli-GPA是什么？
 
-MIli-GPA 是一个为内蒙古财经大学的学生提供的**用于计算个人 GPA 的 web app** ，它目前只支持一种算法 和 百分制的分数填写。它致力于简化查询学分绩点，让我们不再进行繁琐的计算。
+MIli-GPA 是一个为内蒙古财经大学的学生提供的**用于计算个人 GPA 的 [SPA](http://baike.baidu.com/link?url=4viWu2RiTc_0qmeP7Vo943qnlZrsGIwYIAPYCMU6YxffvJ8BosDflsHSErQBuU-lP2UkPw51lVl3ekSiLLt9Q_) ** ，它目前只支持一种算法 和 百分制的分数填写。它致力于简化查询学分绩点，让我们不再进行繁琐的计算。
 
 ## MIli-GPA的特点
 
@@ -25,6 +25,7 @@ MIli-GPA的特点是它专门为移动端打造，手机端的用户体验很不
 3. 提供更多的分数输入方法
 4. 提供更准确温暖的错误提示
 5. 提供更人性化的界面，使用更适合移动端的设计语言
+6. 使用Vue.js 开发一个 beta 版
 
 ## 当前算法
 
