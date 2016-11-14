@@ -2,6 +2,10 @@
     max-width: 768px;
 }
 
-#gpa-input .input-sm {
+#gpa-body .input-sm {
     margin-top: 1em;
+}
+
+#gpa-body button {
+    margin-top: 0.3em;
 }
