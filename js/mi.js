@@ -1,202 +1,221 @@
-var colClassName = document.querySelector('#col-class-name');
-var colPoint = document.querySelector('#col-point');
-var colCredit = document.querySelector('#col-credit');
-var calculateBtn = document.querySelector('#calculate-btn');
-var addNewBtn = document.querySelector('#add-new-btn');
-var deleteBtn = document.querySelector('#delete-a-btn');
-var resetBtn = document.querySelector('#reset-btn');
-var questionBtn = document.querySelector('#question-btn');
-var connectBtn = document.querySelector('#connect-with-me');
-var answerModel = document.querySelector('#calculateAnswer .modal-body p');
-var titleModel = document.querySelector('#calculateAnswer .modal-title');
-window.onload = function() {
-    addNewBtn.addEventListener('click', addNewItem, false);
-    deleteBtn.addEventListener('click', removeItem, false);
-    resetBtn.addEventListener('click', resetItem, false);
-    questionBtn.addEventListener('click', questionAnswerModel, false);
-    calculateBtn.addEventListener('click', calculateGPA, false);
-    connectBtn.addEventListener('click', connectWithMeModel, false);
-    colPoint.addEventListener('focusout', testPointInput, false);
-    colCredit.addEventListener('focusout', testCreditInput, false);
-}
-
-function addNewItem() {
-    event.preventDefault();
-    if (deleteBtn.hasAttribute('disabled')) {
-        deleteBtn.removeAttribute('disabled');
-    }
-    var item1Str = colClassName.lastElementChild.firstElementChild.placeholder.substr(2);
-    var item1 = document.createElement('div');
-    item1.className = 'form-group has-feedback';
-    item1.innerHTML = '<input type="text" class="form-control input-sm"' + 'placeholder="&#x8BFE;&#x7A0B;' + (parseInt(item1Str) + 1) + '">';
-    var item2 = document.createElement('div');
-    item2.className = 'form-group has-feedback';
-    item2.innerHTML = '<input type="text" class="form-control input-sm"><span></span>';
-    var item3 = document.createElement('div');
-    item3.className = 'form-group has-feedback';
-    item3.innerHTML = '<input type="text" class="form-control input-sm"><span></span>';
-    colClassName.appendChild(item1);
-    colPoint.appendChild(item2);
-    colCredit.appendChild(item3);
-}
-
-function removeItem(event) {
-    event.preventDefault();
-    colClassName.removeChild(colClassName.lastElementChild);
-    colPoint.removeChild(colPoint.lastElementChild);
-    colCredit.removeChild(colCredit.lastElementChild);
-    if (colClassName.children.length === 1) {
-        deleteBtn.disabled = 'disabled';
-    }
-}
-
-function resetItem(event) {
-    var pointDomArr = document.querySelectorAll('#col-point input');
-    var creditDomArr = document.querySelectorAll('#col-credit input');
-    for (var i = 0; i < colClassName.children.length; i++) {
-        pointDomArr[i].parentElement.className = 'form-group has-feedback';
-        pointDomArr[i].parentElement.lastElementChild.className = '';
-        creditDomArr[i].parentElement.className = 'form-group has-feedback';
-        creditDomArr[i].parentElement.lastElementChild.className = '';
-
-    }
-}
-
-function getGpaFromPoint(point) {
-    var gpa = 0;
-    switch (true) {
-        case (point <= 100) && (point >= 90):
-            gpa = 4;
-            break;
-        case (point < 90) && (point >= 85):
-            gpa = 3.7;
-            break;
-        case (point < 85) && (point >= 82):
-            gpa = 3.3;
-            break;
-        case (point < 82) && (point >= 78):
-            gpa = 3;
-            break;
-        case (point < 78) && (point >= 75):
-            gpa = 2.7;
-            break;
-        case (point < 75) && (point >= 72):
-            gpa = 2.3;
-            break;
-        case (point < 72) && (point >= 68):
-            gpa = 2;
-            break;
-        case (point < 68) && (point >= 66):
-            gpa = 1.7;
-            break;
-        case (point < 66) && (point >= 64):
-            gpa = 1.5;
-            break;
-        case (point < 64) && (point >= 60):
-            gpa = 1;
-            break;
-        case (point < 60) && (point >= 0):
-            gpa = 0;
-            break;
-        default:
-            gpa = -1;
-            break;
-    }
-    return gpa;
-}
-
-function testPointInput(event) {
-    var e = arguments[0] || window.event,
-        target = e.srcElement ? e.srcElement : e.target;
-    //在这里是实际绑定的事件
-    if (target.nodeName == "INPUT") {
-        if (isNaN(parseInt(target.value)) || target.value < 0 || target.value > 100) {
-            target.parentElement.className = 'form-group has-error has-feedback';
-            target.parentElement.lastElementChild.className = 'glyphicon glyphicon-remove form-control-feedback';
+var checkGrade = function(rules, value, callback) {
+    var grade = parseInt(value, 10);
+    setTimeout(function() {
+        if (!Number.isInteger(grade) && value != '') {
+            callback(new Error('请输入数字值'));
         } else {
-            target.parentElement.className = 'form-group has-feedback';
-            target.parentElement.lastElementChild.className = '';
+            if (grade > 100 || grade < 0) {
+                callback(new Error('必须介于0～100'));
+            } else {
+                callback();
+            }
         }
-    }
-}
-
-function testCreditInput(event) {
-    var e = arguments[0] || window.event,
-        target = e.srcElement ? e.srcElement : e.target;
-    //在这里是实际绑定的事件
-    if (target.nodeName == "INPUT") {
-        if (isNaN(parseInt(target.value)) || target.value < 0 || target.value > 10) {
-            target.parentElement.className = 'form-group has-error has-feedback';
-            target.parentElement.lastElementChild.className = 'glyphicon glyphicon-remove form-control-feedback';
+    }, 800);
+};
+var checkCredit = function(rules, value, callback) {
+    var credit = parseInt(value, 10);
+    setTimeout(function() {
+        if (!Number.isInteger(credit) && value != '') {
+            callback(new Error('请输入数字值'));
         } else {
-            target.parentElement.className = 'form-group has-feedback';
-            target.parentElement.lastElementChild.className = '';
+            if (credit > 10 || credit < 0) {
+                callback(new Error('必须介于0～10'));
+            } else {
+                callback();
+            }
+        }
+    }, 800);
+};
+var app = new Vue({
+    el: '#app',
+    data: {
+        rowNum: 5,
+        stopRemove: false,
+        input: [{
+            index: 1,
+            courseName: '',
+            grade: '',
+            credit: ''
+        }, {
+            index: 2,
+            courseName: '',
+            grade: '',
+            credit: ''
+        }, {
+            index: 3,
+            courseName: '',
+            grade: '',
+            credit: ''
+        }, {
+            index: 4,
+            courseName: '',
+            grade: '',
+            credit: ''
+        }, {
+            index: 5,
+            courseName: '',
+            grade: '',
+            credit: ''
+        }],
+        queryResult: {
+            dialogVisible: false,
+            title: '',
+            content: ''
+        },
+        queryQuestion: {
+            dialogVisible: false,
+            gridData: [{
+                grade: '90―100',
+                credit: 4
+            }, {
+                grade: '85―89.9',
+                credit: 3.7
+            }, {
+                grade: '82―84.9',
+                credit: 3.3
+            }, {
+                grade: '78―81.9',
+                credit: 3
+            }, {
+                grade: '75―77.9',
+                credit: 2.7
+            }, {
+                grade: '72―74.9',
+                credit: 2.3
+            }, {
+                grade: '68―71.9',
+                credit: 2
+            }, {
+                grade: '66―67.9',
+                credit: 1.7
+            }, {
+                grade: '64―65.9',
+                credit: 1.5
+            }, {
+                grade: '60―63.9',
+                credit: 1
+            }, {
+                grade: '60分以下',
+                credit: 0
+            }]
+        },
+        queryDeveloper: {
+            dialogVisible: false
+
+        },
+        rules: {
+            grade: [{
+                validator: checkGrade,
+                trigger: 'change,blur'
+            }],
+            credit: [{
+                validator: checkCredit,
+                trigger: 'change,blur'
+            }]
+
+        }
+    },
+    methods: {
+        addItem: function() {
+            if (this.stopRemove = true) {
+                this.stopRemove = false;
+            }
+            this.input.push({
+                index: this.rowNum + 1,
+                courseName: '',
+                grade: '',
+                credit: ''
+            });
+            this.rowNum++;
+        },
+        removeItem: function() {
+            if (this.rowNum <= 2) {
+                this.stopRemove = true;
+            }
+            this.input.pop();
+            this.rowNum--;
+        },
+        resetInput: function() {
+            for (var i = 0; i < this.input.length; i++) {
+                this.input[i].courseName = '';
+                this.input[i].grade = '';
+                this.input[i].credit = '';
+            }
+        },
+        getGpaFromPoint: function(point) {
+            var gpa = 0;
+            switch (true) {
+                case (point <= 100) && (point >= 90):
+                    gpa = 4;
+                    break;
+                case (point < 90) && (point >= 85):
+                    gpa = 3.7;
+                    break;
+                case (point < 85) && (point >= 82):
+                    gpa = 3.3;
+                    break;
+                case (point < 82) && (point >= 78):
+                    gpa = 3;
+                    break;
+                case (point < 78) && (point >= 75):
+                    gpa = 2.7;
+                    break;
+                case (point < 75) && (point >= 72):
+                    gpa = 2.3;
+                    break;
+                case (point < 72) && (point >= 68):
+                    gpa = 2;
+                    break;
+                case (point < 68) && (point >= 66):
+                    gpa = 1.7;
+                    break;
+                case (point < 66) && (point >= 64):
+                    gpa = 1.5;
+                    break;
+                case (point < 64) && (point >= 60):
+                    gpa = 1;
+                    break;
+                case (point < 60) && (point >= 0):
+                    gpa = 0;
+                    break;
+                default:
+                    gpa = -1;
+                    break;
+            }
+            return gpa;
+        },
+        calculateGPA: function() {
+            var i = 0;
+            var flag = 1;
+            var up = 0;
+            var down = 0;
+            var input = this.input;
+            var getGpaFromPoint = this.getGpaFromPoint;
+            for (i = 0; i < this.rowNum; i++) {
+                if (input[i].grade == '' && input[i].credit == '') {
+                    continue;
+                }
+                if ((parseInt(input[i].grade, 10) >= 0 && parseInt(input[i].grade, 10) <= 100) && (parseInt(input[i].credit, 10) >= 0 && parseInt(input[i].credit, 10) <= 10)) {
+                    up += (getGpaFromPoint(parseInt(input[i].grade, 10)) * parseInt(input[i].credit, 10));
+                    down += parseInt(input[i].credit, 10);
+                } else {
+                    flag = 0;
+                    break;
+                }
+            }
+            if (flag === 0) {
+                this.queryResult.title = '查询失败';
+                this.queryResult.content = '请检查您的数据有效性';
+                this.queryResult.dialogVisible = true;
+            } else if (isNaN(up / down)) {
+                this.queryResult.title = '查询失败';
+                this.queryResult.content = '请不要提交空表';
+                this.queryResult.dialogVisible = true;
+            } else {
+                this.queryResult.title = '查询成功';
+                this.queryResult.content = '您的平均学分绩点为' + ((up / down).toFixed(2));
+                this.queryResult.dialogVisible = true;
+            }
         }
     }
-}
-
-function getCreditArr() {
-    var creditInput = document.querySelectorAll('#col-credit input');
-    var arr = [];
-    for (var i = 0; i < creditInput.length; i++) {
-        if (creditInput[i].value === '') {
-            arr.push(undefined);
-        } else {
-            arr.push(parseInt(creditInput[i].value, 10));
-        }
-    }
-    return arr;
-}
-
-function getPointArr() {
-    var pointInput = document.querySelectorAll('#col-point input');
-    var arr = [];
-    for (var i = 0; i < pointInput.length; i++) {
-        if (pointInput[i].value === '') {
-            arr.push(undefined);
-        } else {
-            arr.push(parseInt(pointInput[i].value, 10));
-        }
-    }
-    return arr;
-
-}
-
-function calculateGPA(event) {
-    event.preventDefault();
-    var i = 0;
-    var flag = 1;
-    var up = 0;
-    var down = 0;
-    var pointArr = getPointArr();
-    var creditArr = getCreditArr();
-    for (i = 0; i < colClassName.children.length; i++) {
-        if(pointArr[i]==undefined && creditArr[i]==undefined){
-            continue;
-        }
-        if (colPoint.children[i].className.indexOf('has-error') !== -1 || colCredit.children[i].className.indexOf('has-error') !== -1) {
-            flag = 0;
-            break;
-        }
-        up += (getGpaFromPoint(pointArr[i]) * creditArr[i]);
-        down += creditArr[i];
-    }
-    if (flag == 0 || isNaN(((up / down).toFixed(2)))) {
-        titleModel.innerHTML = '查询失败';
-        answerModel.innerHTML = '请检查您的数据的有效性';
-    } else {
-        titleModel.innerHTML = '查询成功';
-        answerModel.innerHTML = '您的平均学分绩点为' + ((up / down).toFixed(2));
-    }
-    $('#calculateAnswer').modal('show');
-}
-
-function questionAnswerModel(event) {
-    event.preventDefault();
-    $('#questionAnswer').modal('show');
-}
-
-function connectWithMeModel(event) {
-    event.preventDefault();
-    $('#connectAnswer').modal('show');
-}
+});

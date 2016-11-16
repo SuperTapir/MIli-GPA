@@ -1,11 +1,32 @@
+* {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
 #main-page {
+    margin: 0 auto;
     max-width: 768px;
 }
 
-#gpa-input .input-sm {
-    margin-top: 1em;
+#app p {
+    line-height: 1.4em;
 }
 
-#gpa-body button {
-    margin-top: .3em;
+.text-center {
+    text-align: center;
+}
+
+.btn-block > button {
+    width: 100%;
+}
+
+#btn-area button {
+    margin-top: .4em;
+}
+
+.db-block .el-button-group {
+    width: 100%;
+}
+
+.db-block button {
+    width: 50%;
 }

@@ -3,245 +3,125 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/mi-p2.css">
-    <title>GPA</title>
+    <!-- Element的样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+    <link rel="stylesheet" href="css/mi-p2.css">
 </head>
 
 <body>
-    <div class="container" id="main-page">
-        <h1>GPA计算 <span class="small">Vue-V1.0</span></h1>
-        <form id='gpa-body'>
-            <div class="row text-center">
-                <div class="col-xs-4">
-                    <h5>课程名称</h5>
-                </div>
-                <div class="col-xs-4">
-                    <h5>成绩</h5>
-                </div>
-                <div class="col-xs-4">
-                    <h5>课程学分</h5>
-                </div>
-            </div>
-            <div class="row" id="gpa-input">
-                <div class="col-xs-4" id="col-class-name">
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm" placeholder="课程1">
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm" placeholder="课程2">
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm" placeholder="课程3">
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm" placeholder="课程4">
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm" placeholder="课程5">
-                    </div>
-                </div>
-                <div class="col-xs-4" id="col-point">
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                </div>
-                <div class="col-xs-4" id="col-credit">
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-sm">
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-            <a href="#" class="pull-right" id='question-btn'><i class="fa fa-question-circle"></i>有疑问</a>
+    <div id="app">
+        <div id="main-page">
+            <h1>GPA计算&nbsp;<el-tag>Vue-V1.0</el-tag></h1>
             <hr>
-            <button class="btn btn-success btn-block" id="calculate-btn">
-                <i class="fa fa-calculator"></i>&nbsp;&nbsp;开始计算
-            </button>
-            <div class="row" style="margin-top: 5px margin-bottom: 5px">
-                <div class="col-xs-6">
-                    <button class="btn btn-primary btn-block" id="add-new-btn">
-                        <i class="fa fa-plus-square"></i>&nbsp;&nbsp;新增一项
-                    </button>
+            <el-row :gutter="20">
+                <el-col :span="8">
+                    <h3 class="text-center">课程名称</h3>
+                </el-col>
+                <el-col :span="8">
+                    <h3 class="text-center">成绩</h3>
+                </el-col>
+                <el-col :span="8">
+                    <h3 class="text-center">学分</h3>
+                </el-col>
+            </el-row>
+            <div class="row-item" v-for="item in input">
+                <el-form :model="item" :rules="rules" ref="item">
+                    <el-row :gutter="10">
+                        <el-col :span="8">
+                            <el-form-item prop="courseName">
+                                <el-input v-model="item.courseName"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item prop="grade">
+                                <el-input v-model="item.grade"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item prop="credit">
+                                <el-input v-model="item.credit"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </el-form>
+            </div>
+            <div style="float: right">
+                <el-button type="text" @click.native="queryQuestion.dialogVisible = true"><i class="el-icon-information"></i>更多信息</el-button>
+            </div>
+            <hr style="clear: both;">
+            <div id="btn-area">
+                <div class="btn-block">
+                    <el-button type="primary" @click="calculateGPA"><i class="el-icon-edit"></i> 开始计算</el-button>
                 </div>
-                <div class="col-xs-6">
-                    <button class="btn btn-warning btn-block" id="delete-a-btn">
-                        <i class="fa fa-minus-square"></i>&nbsp;&nbsp;减去一项
-                    </button>
+                <div class="db-block">
+                    <el-button-group>
+                        <el-button type="success" @click="addItem"><i class="el-icon-plus"></i> 新增一项</el-button>
+                        <el-button type="warning" @click="removeItem" :disabled="stopRemove">减去一项<i class="el-icon-minus el-icon--right"></i></el-button>
+                    </el-button-group>
+                </div>
+                <div class="btn-block">
+                    <el-button type="danger" @click="resetInput"><i class="el-icon-delete"></i> 清空结果</el-button>
                 </div>
             </div>
-            <button type="reset" class="btn btn-danger btn-block" id="reset-btn">
-                <i class="fa fa-repeat"></i>&nbsp;&nbsp;清空结果
-            </button>
             <hr>
-            <h4 class="small text-center">蒙ICP备16004984号 | <a href="#" id="connect-with-me">联系开发者</a></h4>
-            <h4 class="small text-center">内蒙古财经大学 | 米粒校园服务平台 | 技术部</h4>
-        </form>
-    </div>
-    <div class="modal fade" id="calculateAnswer">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">查询成功</h4>
+            <footer class="text-center">
+                <p>蒙ICP备16004984号 |
+                    <el-button type="text" @click.native="queryDeveloper.dialogVisible = true">联系开发者</el-button>
+                </p>
+                <h4>内蒙古财经大学 | 米粒校园服务平台 | 技术部</h4>
+            </footer>
+            <el-dialog :title="queryResult.title" v-model="queryResult.dialogVisible" size="large">
+                <span>{{queryResult.content}}</span>
+                <div slot="footer" class="dialog-footer">
+                    <el-button type="primary" @click.native="queryResult.dialogVisible = false">我知道了</el-button>
                 </div>
-                <div class="modal-body">
-                    <p></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="questionAnswer">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">帮助信息</h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lead">对于本程序
-                        <br><strong>课程名称</strong> 为
-                        <mark>选填项</mark>
-                        <br><strong>成绩</strong> 和 <strong>学分</strong>
-                        <mark>必填项</mark>
-                    </p>
-                    <img src="img/mathML.png" alt="" class="img-responsive">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>成绩</th>
-                                <th>绩点</th>
-                            </tr>
-                            <tr>
-                                <td>90—100</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>85—89.9</td>
-                                <td>3.7</td>
-                            </tr>
-                            <tr>
-                                <td>82—84.9</td>
-                                <td>3.3</td>
-                            </tr>
-                            <tr>
-                                <td>78—81.9</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>75—77.9</td>
-                                <td>2.7</td>
-                            </tr>
-                            <tr>
-                                <td>72—74.9</td>
-                                <td>2.3</td>
-                            </tr>
-                            <tr>
-                                <td>68—71.9</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>66—67.9</td>
-                                <td>1.7</td>
-                            </tr>
-                            <tr>
-                                <td>64—65.9</td>
-                                <td>1.5</td>
-                            </tr>
-                            <tr>
-                                <td>60—63.9</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>60分以下</td>
-                                <td>0</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <p>公式依据按照内蒙古财经大学学生手册，同学们发现问题欢迎指正</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="connectAnswer">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">反馈</h4>
-                </div>
-                <div class="modal-body">
-                    <h4>你好，我的朋友</h4> 本程序是一个开源项目,它现在托管在 <i class="fa fa-github"></i> Github上
-                    <br>如果你找到了BUG或者有什么建议,请及时反应给我,这里是我的联系方式：
+            </el-dialog>
+            <el-dialog title="帮助信息" v-model="queryQuestion.dialogVisible" size="large" top="5%">
+                <p>对于本程序
+                    <br><strong>课程名称</strong> 为
+                    <mark>选填项</mark>
                     <br>
+                    <strong>成绩</strong> 和 <strong>学分</strong>
+                    <mark>必填项</mark>
                     <br>
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="fa fa-qq fa-2x"> 672598974</i>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                            <li><img src="img/myQRCode.jpg" class="img-responsive" alt=""></li>
-                        </ul>
-                    </div>
-                    <hr> 如果你也是一位开发者,我很愿意和你一同开发这个项目,你可已在本项目上给我 Pull Request
+                    <img src="img/mathML.png" width="280">
+                </p>
+                <el-table :data="queryQuestion.gridData">
+                    <el-table-column property="grade" label="成绩" style="width: 50%"></el-table-column>
+                    <el-table-column property="credit" label="绩点" style="width: 50%"></el-table-column>
+                </el-table>
+                <div slot="footer" class="dialog-footer">
+                    <el-button type="primary" @click.native="queryQuestion.dialogVisible = false">我知道了</el-button>
+                </div>
+            </el-dialog>
+            <el-dialog title="联系开发者" v-model="queryDeveloper.dialogVisible" size="large">
+                <h2>你好，我的朋友</h2>
+                <p>
+                    本程序是一个开源项目,它现在托管在Github上
+                    <br> 如果你找到了BUG或者有什么建议,请及时反应给我,这里是我的联系方式：
+                </p>
+                <el-popover ref="popover" placement="bottom-start" width="200" height="200" trigger="click">
+                    <img src="img/myQRCode.jpg" width="200" alt="">
+                </el-popover>
+                <el-button v-popover:popover>QQ: 672598974</el-button>
+                <hr>
+                <p>
+                    如果你也是一位开发者,我很愿意和你一同开发这个项目,你可已在本项目上给我 Pull Request
                     <br>
                     <a href="https://github.com/HelloWorldLKL/MIli-GPA" target="_blank">HelloWorldLKL/MIli-GPA</a>
                     <br>
+                </p>
+                <div slot="footer" class="dialog-footer">
+                    <el-button type="primary" @click.native="queryDeveloper.dialogVisible = false">我知道了</el-button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
+            </el-dialog>
         </div>
-        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
-    <script src="https://use.fontawesome.com/d843c06167.js"></script>
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/mi.js"></script>
 </body>
+<!-- 引入Vue -->
+<script src="js/vue.js"></script>
+<!-- 引入Element的组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="js/mi.js"></script>
 
 </html>
