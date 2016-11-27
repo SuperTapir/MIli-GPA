@@ -11,17 +11,17 @@
 
 <body>
     <div class="container" id="main-page">
-        <h1>GPA计算 <span class="small">v3.1</span></h1>
+        <h1>GPA计算 <span class="small">v3.2</span></h1>
         <form id='gpa-body'>
             <div class="row text-center">
                 <div class="col-xs-4">
-                    <h5>课程名称</h5>
+                    <h5 class="form-head">课程名称</h5>
                 </div>
                 <div class="col-xs-4">
-                    <h5>成绩</h5>
+                    <h5 class="form-head">成绩</h5>
                 </div>
                 <div class="col-xs-4">
-                    <h5>课程学分</h5>
+                    <h5 class="form-head">课程学分</h5>
                 </div>
             </div>
             <div class="row" id="gpa-input">
@@ -92,7 +92,7 @@
             <button class="btn btn-success btn-block" id="calculate-btn">
                 <i class="fa fa-calculator"></i>&nbsp;&nbsp;开始计算
             </button>
-            <div class="row" style="margin-top: 5px margin-bottom: 5px">
+            <div class="row">
                 <div class="col-xs-6">
                     <button class="btn btn-primary btn-block" id="add-new-btn">
                         <i class="fa fa-plus-square"></i>&nbsp;&nbsp;新增一项
@@ -112,12 +112,12 @@
             <h4 class="small text-center">内蒙古财经大学 | 米粒校园服务平台 | 技术部</h4>
         </form>
     </div>
-    <div class="modal fade" id="calculateAnswer">
+    <div class="modal fade" id="answer-dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">查询成功</h4>
+                    <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
                     <p></p>
@@ -128,7 +128,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="questionAnswer">
+    <div class="modal fade" id="help-dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -203,7 +203,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="connectAnswer">
+    <div class="modal fade" id="feedback-dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -233,11 +233,8 @@
                     <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
     <script src="https://use.fontawesome.com/d843c06167.js"></script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

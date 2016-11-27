@@ -7,17 +7,17 @@ var deleteBtn = document.querySelector('#delete-a-btn');
 var resetBtn = document.querySelector('#reset-btn');
 var questionBtn = document.querySelector('#question-btn');
 var connectBtn = document.querySelector('#connect-with-me');
-var answerModel = document.querySelector('#calculateAnswer .modal-body p');
-var titleModel = document.querySelector('#calculateAnswer .modal-title');
+var answerModel = document.querySelector('#answer-dialog .modal-body p');
+var titleModel = document.querySelector('#answer-dialog .modal-title');
 window.onload = function() {
     addNewBtn.addEventListener('click', addNewItem, false);
     deleteBtn.addEventListener('click', removeItem, false);
     resetBtn.addEventListener('click', resetItem, false);
-    questionBtn.addEventListener('click', questionAnswerModel, false);
+    questionBtn.addEventListener('click', callHelpDialog, false);
     calculateBtn.addEventListener('click', calculateGPA, false);
-    connectBtn.addEventListener('click', connectWithMeModel, false);
-    colPoint.addEventListener('focusout', testPointInput, false);
-    colCredit.addEventListener('focusout', testCreditInput, false);
+    connectBtn.addEventListener('click', callFeedbackDialog, false);
+    colPoint.addEventListener('focusout', testInput(0, 100), false);
+    colCredit.addEventListener('focusout', testInput(0, 10), false);
 }
 
 function addNewItem() {
@@ -105,61 +105,36 @@ function getGpaFromPoint(point) {
     return gpa;
 }
 
-function testPointInput(event) {
-    var e = arguments[0] || window.event,
-        target = e.srcElement ? e.srcElement : e.target;
-    //在这里是实际绑定的事件
-    if (target.nodeName == "INPUT") {
-        if (isNaN(parseInt(target.value)) || target.value < 0 || target.value > 100) {
-            target.parentElement.className = 'form-group has-error has-feedback';
-            target.parentElement.lastElementChild.className = 'glyphicon glyphicon-remove form-control-feedback';
-        } else {
-            target.parentElement.className = 'form-group has-feedback';
-            target.parentElement.lastElementChild.className = '';
+function testInput(min, max) {
+    return function() {
+        var e = window.event,
+            target = e.srcElement ? e.srcElement : e.target;
+        //在这里是实际绑定的事件
+        if (target.nodeName == "INPUT") {
+            if (isNaN(parseInt(target.value)) || target.value < min || target.value > max) {
+                target.parentElement.className = 'form-group has-error has-feedback';
+                target.parentElement.lastElementChild.className = 'glyphicon glyphicon-remove form-control-feedback';
+            } else {
+                target.parentElement.className = 'form-group has-feedback';
+                target.parentElement.lastElementChild.className = '';
+            }
         }
     }
 }
 
-function testCreditInput(event) {
-    var e = arguments[0] || window.event,
-        target = e.srcElement ? e.srcElement : e.target;
-    //在这里是实际绑定的事件
-    if (target.nodeName == "INPUT") {
-        if (isNaN(parseInt(target.value)) || target.value < 0 || target.value > 10) {
-            target.parentElement.className = 'form-group has-error has-feedback';
-            target.parentElement.lastElementChild.className = 'glyphicon glyphicon-remove form-control-feedback';
-        } else {
-            target.parentElement.className = 'form-group has-feedback';
-            target.parentElement.lastElementChild.className = '';
+function getInputArr(cssSelector) {
+    return function() {
+        var input = document.querySelectorAll(cssSelector + ' input');
+        var arr = [];
+        for (var i = 0; i < input.length; i++) {
+            if (input[i].value === '') {
+                arr.push(undefined);
+            } else {
+                arr.push(parseInt(input[i].value, 10));
+            }
         }
+        return arr;
     }
-}
-
-function getCreditArr() {
-    var creditInput = document.querySelectorAll('#col-credit input');
-    var arr = [];
-    for (var i = 0; i < creditInput.length; i++) {
-        if (creditInput[i].value === '') {
-            arr.push(undefined);
-        } else {
-            arr.push(parseInt(creditInput[i].value, 10));
-        }
-    }
-    return arr;
-}
-
-function getPointArr() {
-    var pointInput = document.querySelectorAll('#col-point input');
-    var arr = [];
-    for (var i = 0; i < pointInput.length; i++) {
-        if (pointInput[i].value === '') {
-            arr.push(undefined);
-        } else {
-            arr.push(parseInt(pointInput[i].value, 10));
-        }
-    }
-    return arr;
-
 }
 
 function calculateGPA(event) {
@@ -168,13 +143,13 @@ function calculateGPA(event) {
     var flag = 1;
     var up = 0;
     var down = 0;
-    var pointArr = getPointArr();
-    var creditArr = getCreditArr();
+    var pointArr = getInputArr('#col-point')();
+    var creditArr = getInputArr('#col-credit')();
     for (i = 0; i < colClassName.children.length; i++) {
-        if(pointArr[i]==undefined && creditArr[i]==undefined){
+        if (pointArr[i] == undefined && creditArr[i] == undefined) {
             continue;
         }
-        if (colPoint.children[i].className.indexOf('has-error') !== -1 || colCredit.children[i].className.indexOf('has-error') !== -1) {
+        if (colPoint.children[i].classList.contains('has-error') || colCredit.children[i].classList.contains('has-error')) {
             flag = 0;
             break;
         }
@@ -188,15 +163,15 @@ function calculateGPA(event) {
         titleModel.innerHTML = '查询成功';
         answerModel.innerHTML = '您的平均学分绩点为' + ((up / down).toFixed(2));
     }
-    $('#calculateAnswer').modal('show');
+    $('#answer-dialog').modal('show');
 }
 
-function questionAnswerModel(event) {
+function callHelpDialog(event) {
     event.preventDefault();
-    $('#questionAnswer').modal('show');
+    $('#help-dialog').modal('show');
 }
 
-function connectWithMeModel(event) {
+function callFeedbackDialog(event) {
     event.preventDefault();
-    $('#connectAnswer').modal('show');
+    $('#feedback-dialog').modal('show');
 }
