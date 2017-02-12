@@ -1,127 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
+<html>
+  <head>
     <meta charset="utf-8">
-    <!-- Element的样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
-    <link rel="stylesheet" href="css/mi-p2.css">
-</head>
-
-<body>
-    <div id="app">
-        <div id="main-page">
-            <h1>GPA计算&nbsp;<el-tag>Vue-V1.0</el-tag></h1>
-            <hr>
-            <el-row :gutter="20">
-                <el-col :span="8">
-                    <h3 class="text-center">课程名称</h3>
-                </el-col>
-                <el-col :span="8">
-                    <h3 class="text-center">成绩</h3>
-                </el-col>
-                <el-col :span="8">
-                    <h3 class="text-center">学分</h3>
-                </el-col>
-            </el-row>
-            <div class="row-item" v-for="item in input">
-                <el-form :model="item" :rules="rules" ref="item">
-                    <el-row :gutter="10">
-                        <el-col :span="8">
-                            <el-form-item prop="courseName">
-                                <el-input v-model="item.courseName"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="8">
-                            <el-form-item prop="grade">
-                                <el-input v-model="item.grade"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="8">
-                            <el-form-item prop="credit">
-                                <el-input v-model="item.credit"></el-input>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                </el-form>
-            </div>
-            <div style="float: right">
-                <el-button type="text" @click.native="queryQuestion.dialogVisible = true"><i class="el-icon-information"></i>更多信息</el-button>
-            </div>
-            <hr style="clear: both;">
-            <div id="btn-area">
-                <div class="btn-block">
-                    <el-button type="primary" @click="calculateGPA"><i class="el-icon-edit"></i> 开始计算</el-button>
-                </div>
-                <div class="db-block">
-                    <el-button-group>
-                        <el-button type="success" @click="addItem"><i class="el-icon-plus"></i> 新增一项</el-button>
-                        <el-button type="warning" @click="removeItem" :disabled="stopRemove">减去一项<i class="el-icon-minus el-icon--right"></i></el-button>
-                    </el-button-group>
-                </div>
-                <div class="btn-block">
-                    <el-button type="danger" @click="resetInput"><i class="el-icon-delete"></i> 清空结果</el-button>
-                </div>
-            </div>
-            <hr>
-            <footer class="text-center">
-                <p>蒙ICP备16004984号 |
-                    <el-button type="text" @click.native="queryDeveloper.dialogVisible = true">联系开发者</el-button>
-                </p>
-                <h4>内蒙古财经大学 | 米粒校园服务平台 | 技术部</h4>
-            </footer>
-            <el-dialog :title="queryResult.title" v-model="queryResult.dialogVisible" size="large">
-                <span>{{queryResult.content}}</span>
-                <div slot="footer" class="dialog-footer">
-                    <el-button type="primary" @click.native="queryResult.dialogVisible = false">我知道了</el-button>
-                </div>
-            </el-dialog>
-            <el-dialog title="帮助信息" v-model="queryQuestion.dialogVisible" size="large" top="5%">
-                <p>对于本程序
-                    <br><strong>课程名称</strong> 为
-                    <mark>选填项</mark>
-                    <br>
-                    <strong>成绩</strong> 和 <strong>学分</strong>
-                    <mark>必填项</mark>
-                    <br>
-                    <img src="img/mathML.png" width="280">
-                </p>
-                <el-table :data="queryQuestion.gridData">
-                    <el-table-column property="grade" label="成绩" style="width: 50%"></el-table-column>
-                    <el-table-column property="credit" label="绩点" style="width: 50%"></el-table-column>
-                </el-table>
-                <div slot="footer" class="dialog-footer">
-                    <el-button type="primary" @click.native="queryQuestion.dialogVisible = false">我知道了</el-button>
-                </div>
-            </el-dialog>
-            <el-dialog title="联系开发者" v-model="queryDeveloper.dialogVisible" size="large">
-                <h2>你好，我的朋友</h2>
-                <p>
-                    本程序是一个开源项目,它现在托管在Github上
-                    <br> 如果你找到了BUG或者有什么建议,请及时反应给我,这里是我的联系方式：
-                </p>
-                <el-popover ref="popover" placement="bottom-start" width="200" height="200" trigger="click">
-                    <img src="img/myQRCode.jpg" width="200" alt="">
-                </el-popover>
-                <el-button v-popover:popover>QQ: 672598974</el-button>
-                <hr>
-                <p>
-                    如果你也是一位开发者,我很愿意和你一同开发这个项目,你可已在本项目上给我 Pull Request
-                    <br>
-                    <a href="https://github.com/HelloWorldLKL/MIli-GPA" target="_blank">HelloWorldLKL/MIli-GPA</a>
-                    <br>
-                </p>
-                <div slot="footer" class="dialog-footer">
-                    <el-button type="primary" @click.native="queryDeveloper.dialogVisible = false">我知道了</el-button>
-                </div>
-            </el-dialog>
-        </div>
-    </div>
-</body>
-<!-- 引入Vue -->
-<script src="js/vue.js"></script>
-<!-- 引入Element的组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<script src="js/mi.js"></script>
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>MIli-GPA</title>
+    <!-- <link rel="stylesheet" href="static/base.css"> -->
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
 </html>

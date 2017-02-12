@@ -1,0 +1,26 @@
+body
+	font-family "Helvetica Neue", "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Helvetica, Arial, sans-serif
+	font-size 13px
+	font-weight 200
+	color #1F2D3D
+
+@media (-webkit-min-device-pixel-radio: 1.5),(min-device-pixel-radio: 1.5)
+	.border-1px
+		&:after
+			-webkit-transform scaleY(0.7)
+			transform: scaleY(0.7)
+			
+@media (-webkit-min-device-pixel-radio: 2),(min-device-pixel-radio: 2)
+	.border-1px
+		&:after
+			-webkit-transform scaleY(0.5)
+			transform: scaleY(0.5)
+.clearfix
+	display: inline-block
+	&:after
+		display: block
+		content: "."
+		height: 0
+		line-height: 0
+		clear: both
+		visibility: hidden
