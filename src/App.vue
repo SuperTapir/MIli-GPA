@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <h1 class="title">
-    &nbsp;GPA计算<span class="tag"><el-tag>Vue-V2.0</el-tag></span>
+    &nbsp;GPA计算<span class="tag"><el-tag>Vue-V2.1</el-tag></span>
     <div class="help-dialog-wrapper">
     	<help-dialog></help-dialog>
     </div>
     </h1>
     <el-row>
       <el-col :span="4">&nbsp;</el-col>
-      <el-col :span="8" class="table-header top">成绩</el-col>
-      <el-col :span="8" class="table-header top">学分</el-col>
+      <el-col :span="8" class="table-header">成绩</el-col>
+      <el-col :span="8" class="table-header">学分</el-col>
     </el-row>
     <transition-group name="slide">
       <div class="row-item" v-for="(item, index) in input" :key="item">
@@ -250,9 +250,8 @@ export default ({
   	text-align center
   	font-size 1.2em
   	line-height 36px
-  	&.top
-  		margin-bottom 8px
   .controler-wrapper
+    padding-bottom 300px
   	.query-dialog-controler
   		display: inline-block
 

@@ -1,14 +1,9 @@
 <template>
   <div class="helpTeam">
-    <i type="info" @click="helpDialogVisible = true" class="el-icon-information"></i>
+    <i @click="helpDialogVisible = true" class="el-icon-information"></i>
     <el-dialog title="帮助信息" v-model="helpDialogVisible" size="large" top="5%">
-      <p>对于本程序
-        <br><strong>课程名称</strong> 为
-        <mark>选填项</mark>
-        <br>
-        <strong>成绩</strong> 和 <strong>学分</strong>
-        <mark>必填项</mark>
-        <br>
+      <h3>采用算法</h3>
+      <p>
         <img src="../helpDialog/mathML.png" style="width: 100%; height: auto;max-width: 100%; display: block;">
       </p>
       <el-table :data="gridData">
@@ -25,8 +20,6 @@
 
 <script type="text/ecmascript-6">
 export default {
-  props: {
-  },
   data() {
     return {
       helpDialogVisible: false,
