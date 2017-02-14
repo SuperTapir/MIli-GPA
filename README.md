@@ -1,6 +1,6 @@
-# MIli-GPA-Vue-Edition
+# MIli-GPA
 
-> Vue.js 版的 MIli-GPA
+> 一款专为移动端打造的 GPA计算器
 
 ## 编译
 
@@ -20,8 +20,9 @@ npm run build
 + 使用 Vue.js 框架处理逻辑，方便后续的开发
 
 
-+ 专门为移动端打造，用户体验很不错，它能很方便的作为子页面嵌入其他地方。
 + 使用饿了么的 Element-UI 组件库，美观稳定
++ 搭配了 Vue-Router 方便管理路由
++ 专门为移动端打造，用户体验很不错，它能很方便的作为子页面嵌入其他地方。
 
 ## 路线图
 
@@ -31,6 +32,8 @@ npm run build
 4. 提供更人性化的界面，使用更适合移动端的设计语言
 
 ## 当前算法
+
+### 财大四分制
 
  ![mathML](src/components/helpDialog/mathML.png)
 
@@ -49,4 +52,17 @@ npm run build
 | 64—65.9 | 1.5  |
 | 60—63.9 | 1    |
 | 60分以下   | 0    |
+
+### 等级制
+
+![mathML](src/components/helpDialog/mathML2.png)
+
+| 等级   | 成绩点数 |
+| ---- | ---- |
+| A    | 4    |
+| B    | 3    |
+| C    | 2    |
+| D    | 1    |
+| E    | 0    |
+
 
