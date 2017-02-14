@@ -1,15 +1,25 @@
 <template>
   <div class="helpTeam">
     <i @click="helpDialogVisible = true" class="el-icon-information"></i>
-    <el-dialog title="帮助信息" v-model="helpDialogVisible" size="large" top="5%">
-      <h3>采用算法</h3>
-      <p>
-        <img src="../helpDialog/mathML.png" style="width: 100%; height: auto;max-width: 100%; display: block;">
-      </p>
-      <el-table :data="gridData">
-        <el-table-column property="grade" label="成绩" style="width: 50%"></el-table-column>
-        <el-table-column property="credit" label="绩点" style="width: 50%"></el-table-column>
-      </el-table>
+    <el-dialog title="采用算法" v-model="helpDialogVisible" size="large" top="5%">
+      <el-tabs v-model="activeName" type="card">
+        <el-tab-pane label="财大四分制" name="first">
+          <p>
+            <img src="../helpDialog/mathML.png" style="width: 100%; height: auto;max-width: 100%; display: block;">
+          </p>
+          <el-table :data="gridData.caidaMethod">
+            <el-table-column property="grade" label="成绩" style="width: 50%"></el-table-column>
+            <el-table-column property="credit" label="绩点" style="width: 50%"></el-table-column>
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="等级制" name="second">
+          <img src="../helpDialog/mathML2.png" style="width: 100%; height: auto;max-width: 100%; display: block;">
+          <el-table :data="gridData.rankMethod">
+            <el-table-column property="rank" label="等级" style="width: 50%"></el-table-column>
+            <el-table-column property="rankPoint" label="成绩点数" style="width: 50%"></el-table-column>
+          </el-table>
+        </el-tab-pane>
+      </el-tabs>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click.native="helpDialogVisible = false">我知道了</el-button>
       </div>
@@ -17,67 +27,71 @@
   </div>
 </template>
 
-
 <script type="text/ecmascript-6">
 export default {
   data() {
     return {
+      activeName: 'first',
       helpDialogVisible: false,
-      gridData: [{
-        grade: '90 ~ 100',
-        credit: 4
-      }, {
-        grade: '85 ~ 89.9',
-        credit: 3.7
-      }, {
-        grade: '82 ~ 84.9',
-        credit: 3.3
-      }, {
-        grade: '78 ~ 81.9',
-        credit: 3
-      }, {
-        grade: '75 ~ 77.9',
-        credit: 2.7
-      }, {
-        grade: '72 ~ 74.9',
-        credit: 2.3
-      }, {
-        grade: '68 ~ 71.9',
-        credit: 2
-      }, {
-        grade: '66 ~ 67.9',
-        credit: 1.7
-      }, {
-        grade: '64 ~ 65.9',
-        credit: 1.5
-      }, {
-        grade: '60 ~ 63.9',
-        credit: 1
-      }, {
-        grade: '60分以下',
-        credit: 0
-      }]
-    }
-  },
-  computed: {
-    queryResult() {
-      return [{
-        'title': '查询成功',
-        'content': '您的平均学分绩点为' + this.gpa
-      }, {
-        'title': '查询失败',
-        'content': '请检查您的数据有效性'
-      }, {
-        'title': '查询失败',
-        'content': '请不要提交空表'
-      }]
+      gridData: {
+        caidaMethod: [{
+          grade: '90 ~ 100',
+          credit: 4
+        }, {
+          grade: '85 ~ 89.9',
+          credit: 3.7
+        }, {
+          grade: '82 ~ 84.9',
+          credit: 3.3
+        }, {
+          grade: '78 ~ 81.9',
+          credit: 3
+        }, {
+          grade: '75 ~ 77.9',
+          credit: 2.7
+        }, {
+          grade: '72 ~ 74.9',
+          credit: 2.3
+        }, {
+          grade: '68 ~ 71.9',
+          credit: 2
+        }, {
+          grade: '66 ~ 67.9',
+          credit: 1.7
+        }, {
+          grade: '64 ~ 65.9',
+          credit: 1.5
+        }, {
+          grade: '60 ~ 63.9',
+          credit: 1
+        }, {
+          grade: '60分以下',
+          credit: 0
+        }],
+        rankMethod: [{
+          rank: 'A',
+          rankPoint: 4
+        }, {
+          rank: 'B',
+          rankPoint: 3
+        }, {
+          rank: 'C',
+          rankPoint: 2
+        }, {
+          rank: 'D',
+          rankPoint: 1
+        }, {
+          rank: 'E',
+          rankPoint: 0
+        }]
+      }
     }
   }
 }
+
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .helpTeam
   display inline-block
-  margin-right 10px
 </style>

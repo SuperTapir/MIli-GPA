@@ -1,239 +1,58 @@
 <template>
   <div id="app">
     <h1 class="title">
-    &nbsp;GPA计算<span class="tag"><el-tag>Vue-V2.1</el-tag></span>
-    <div class="help-dialog-wrapper">
-    	<help-dialog></help-dialog>
+    &nbsp;GPA计算
+    <div class="method-switcher">
+      <el-dropdown @command="switchMethod" trigger="click">
+        <el-button type="primary">
+          {{ dropdownText }}<i class="el-icon-caret-bottom el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <router-link to="/cadaMethod">
+            <el-dropdown-item command="财大四分制">财大四分制</el-dropdown-item>
+          </router-link>
+          <router-link to="/rankMethod">
+            <el-dropdown-item command="等级制" divided>等级制</el-dropdown-item>
+          </router-link>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
+    <help-dialog></help-dialog>
     </h1>
-    <el-row>
-      <el-col :span="4">&nbsp;</el-col>
-      <el-col :span="8" class="table-header">成绩</el-col>
-      <el-col :span="8" class="table-header">学分</el-col>
-    </el-row>
-    <transition-group name="slide">
-      <div class="row-item" v-for="(item, index) in input" :key="item">
-        <el-form :model="item" :rules="rules" ref="item">
-          <el-row :gutter="10">
-            <el-col :span="4" class="table-header">
-              科目{{ index + 1 }}
-            </el-col>
-            <el-col :span="8">
-              <el-form-item prop="grade">
-                <el-input v-model="item.grade"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="8">
-              <el-form-item prop="credit">
-                <el-input v-model="item.credit"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="2">
-              <el-form-item prop="credit">
-                <el-button @click.prevent="removeItem(index)" :disabled="stopRemove" icon="delete"></el-button>
-              </el-form-item>
-            </el-col>
-          </el-row>
-        </el-form>
-      </div>
-    </transition-group>
-    <el-row class="controler-wrapper">
-      <el-col :span="4">&nbsp;</el-col>
-      <el-col :span="20">
-      	<div @click="calculateGPA()" class="query-dialog-controler">
-        	<query-result-dialog :statusNo="queryStatusNo" :gpa="gpa" ></query-result-dialog>
-        </div>
-        <el-button @click="addItem()">新增科目</el-button>
-        <el-button @click="resetInput()">重置</el-button>
-      </el-col>
-    </el-row>
+    <router-view></router-view>
   </div>
 </template>
 
 
 
 <script type="text/ecmascript-6">
-import queryResultDialog from 'components/queryResultDialog/queryResultDialog'
 import helpDialog from 'components/helpDialog/helpDialog'
-
-const STATUS_OK = 0
-const STATUS_ERR = 1
-const STATUS_EMPTY = 2
-
-var checkGrade = function(rules, value, callback) {
-  var grade = parseInt(value, 10)
-  setTimeout(function() {
-    if (!Number.isInteger(grade) && value !== '') {
-      callback(new Error('请输入数字值'))
-    } else {
-      if (grade > 100 || grade < 0) {
-        callback(new Error('必须介于0～100'))
-      } else {
-        callback()
-      }
-    }
-  }, 800)
-}
-var checkCredit = function(rules, value, callback) {
-  var credit = parseInt(value, 10)
-  setTimeout(function() {
-    if (!Number.isInteger(credit) && value !== '') {
-      callback(new Error('请输入数字值'))
-    } else {
-      if (credit > 10 || credit < 0) {
-        callback(new Error('必须介于0～10'))
-      } else {
-        callback()
-      }
-    }
-  }, 800)
-}
-export default ({
+export default {
   components: {
-    'query-result-dialog': queryResultDialog,
     'help-dialog': helpDialog
   },
   data() {
     return {
-      gpa: -1,
-      rowNum: 5,
-      stopRemove: false,
-      input: [{
-        grade: '',
-        credit: ''
-      }, {
-        grade: '',
-        credit: ''
-      }, {
-        grade: '',
-        credit: ''
-      }, {
-        grade: '',
-        credit: ''
-      }, {
-        grade: '',
-        credit: ''
-      }],
-      queryStatusNo: -1,
-      queryDeveloper: {
-        dialogVisible: false
-      },
-      rules: {
-        grade: [{
-          validator: checkGrade,
-          trigger: 'change,blur'
-        }],
-        credit: [{
-          validator: checkCredit,
-          trigger: 'change,blur'
-        }]
-      }
+      dropdownText: '财大四分制'
     }
   },
   methods: {
-    addItem() {
-      if (this.stopRemove) {
-        this.stopRemove = false
-      }
-      this.input.push({
-        grade: '',
-        credit: ''
+    switchMethod(key) {
+      this.$message({
+        message: '已将算法切换为 ' + key,
+        type: 'success',
+        duration: 1000,
+        offset: 100
       })
-      this.rowNum++
-    },
-    removeItem(index) {
-      if (this.rowNum <= 2) {
-        this.stopRemove = true
-      }
-      this.input.splice(index, 1)
-      this.rowNum--
-    },
-    resetInput() {
-      for (var i = 0; i < this.input.length; i++) {
-        this.input[i].grade = ''
-        this.input[i].credit = ''
-      }
-    },
-    getGpaFromPoint(point) {
-      var gpa = 0
-      switch (true) {
-        case (point <= 100) && (point >= 90):
-          gpa = 4
-          break
-        case (point < 90) && (point >= 85):
-          gpa = 3.7
-          break
-        case (point < 85) && (point >= 82):
-          gpa = 3.3
-          break
-        case (point < 82) && (point >= 78):
-          gpa = 3
-          break
-        case (point < 78) && (point >= 75):
-          gpa = 2.7
-          break
-        case (point < 75) && (point >= 72):
-          gpa = 2.3
-          break
-        case (point < 72) && (point >= 68):
-          gpa = 2
-          break
-        case (point < 68) && (point >= 66):
-          gpa = 1.7
-          break
-        case (point < 66) && (point >= 64):
-          gpa = 1.5
-          break
-        case (point < 64) && (point >= 60):
-          gpa = 1
-          break
-        case (point < 60) && (point >= 0):
-          gpa = 0
-          break
-        default:
-          gpa = -1
-          break
-      }
-      return gpa
-    },
-    calculateGPA() {
-      var i = 0
-      var flag = 1
-      var up = 0
-      var down = 0
-      var input = this.input
-      var getGpaFromPoint = this.getGpaFromPoint
-      for (i = 0; i < this.rowNum; i++) {
-        if (input[i].grade === '' && input[i].credit === '') {
-          continue
-        }
-        if ((parseInt(input[i].grade, 10) >= 0 && parseInt(input[i].grade, 10) <= 100) && (parseInt(input[i].credit, 10) >= 0 && parseInt(input[i].credit, 10) <= 10)) {
-          up += (getGpaFromPoint(parseInt(input[i].grade, 10)) * parseInt(input[i].credit, 10))
-          down += parseInt(input[i].credit, 10)
-        } else {
-          flag = 0
-          break
-        }
-      }
-      if (flag === 0) {
-        this.queryStatusNo = STATUS_ERR
-        console.log(this.queryStatusNo)
-      } else if (isNaN(up / down)) {
-        this.queryStatusNo = STATUS_EMPTY
-        console.log(this.queryStatusNo)
-      } else {
-        this.queryStatusNo = STATUS_OK
-        this.gpa = (up / down).toFixed(2)
-        console.log(this.queryStatusNo + 'gpa:' + this.gpa)
-      }
+      this.dropdownText = key
     }
   }
-})
+}
 
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-@import "./common/stylus/index.styl"
+@import 'common/stylus/mixin'
 #app
   .title
     border-1px(rgba(7, 17, 27, 0.1))
@@ -242,25 +61,8 @@ export default ({
       bottom 5px
       margin-left 10px
       font-size 12px
-    .help-dialog-wrapper
-    	position absolute
-    	right 0
-    	bottom 5px
-  .table-header
-  	text-align center
-  	font-size 1.2em
-  	line-height 36px
-  .controler-wrapper
-    padding-bottom 300px
-  	.query-dialog-controler
-  		display: inline-block
-
-.slide-enter-active
-	transition all .8s ease
-.slide-leave-active
-	transition all .8s
-.slide-enter,
-.slide-leave-active
-	transform translateX(500px)
-	opacity 0
+    .method-switcher
+      position absolute
+      right 30px
+      bottom 5px
 </style>
