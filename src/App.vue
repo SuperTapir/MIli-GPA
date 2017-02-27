@@ -19,7 +19,9 @@
     </div>
     <help-dialog></help-dialog>
     </h1>
-    <router-view></router-view>
+    <transition name="fade">
+      <router-view style="position: absolute;width: 100%"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -38,8 +40,17 @@ export default {
   },
   methods: {
     switchMethod(key) {
+      if (this.dropdownText === key) {
+        this.$message({
+          message: `当前算法已为 ${key}`,
+          type: 'warning',
+          duration: 1000,
+          offset: 100
+        })
+        return
+      }
       this.$message({
-        message: '已将算法切换为 ' + key,
+        message: `已将算法切换为 ${key}`,
         type: 'success',
         duration: 1000,
         offset: 100
@@ -65,4 +76,12 @@ export default {
       position absolute
       right 30px
       bottom 5px
+.fade-enter
+  opacity 0
+  transform translateX(-100%)
+.fade-enter-active, .fade-leave-active 
+  transition all 0.65s
+.fade-leave-active 
+  opacity 0
+  transform translateX(100%)
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="caida-method-wrapper">
+  <div>
     <el-row>
       <el-col :span="4">&nbsp;</el-col>
       <el-col :span="8" class="table-header">等级</el-col>
@@ -186,20 +186,19 @@ export default ({
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "../../common/stylus/mixin"
-.caida-method-wrapper
-  .table-header
-    text-align center
-    font-size 1.2em
-    line-height 36px
-  .rank-select
-    width 100%
-  .controler-wrapper
-    padding-bottom 300px
-    .query-dialog-controler
-      display inline-block
-      margin-right 10px
-  input
-    width 100%
+.table-header
+  text-align center
+  font-size 1.2em
+  line-height 36px
+.rank-select
+  width 100%
+.controler-wrapper
+  padding-bottom 300px
+  .query-dialog-controler
+    display inline-block
+    margin-right 10px
+input
+  width 100%
 .slide-enter-active
   transition all .65s ease
 .slide-leave-active

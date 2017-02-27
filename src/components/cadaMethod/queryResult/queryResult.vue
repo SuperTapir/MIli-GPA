@@ -25,7 +25,7 @@ export default {
             duration = 0
           } else {
             type = 'error'
-            duration = 4500
+            duration = 3500
           }
           this.$notify({
             title: this.queryResult[this.statusNo].title,
