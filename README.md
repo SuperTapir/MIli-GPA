@@ -35,7 +35,7 @@ npm run build
 
 ### 标准四分制
 
-![standMathML](/Users/kilo/GoogleDerive/Development/Git/MIli-GPA/src/components/helpDialog/standMathML.png)
+![standMathML](src/components/helpDialog/standMathML.png)
 
 | 成绩      | 绩点   |
 | ------- | ---- |
@@ -47,7 +47,7 @@ npm run build
 
 ### 财大四分制
 
-![caidaMathML](/Users/kilo/GoogleDerive/Development/Git/MIli-GPA/src/components/helpDialog/caidaMathML.png)
+![caidaMathML](src/components/helpDialog/caidaMathML.png)
 
 | 成绩      | 绩点   |
 | ------- | ---- |
@@ -65,7 +65,7 @@ npm run build
 
 ### 等级制
 
-![rankMathML](/Users/kilo/GoogleDerive/Development/Git/MIli-GPA/src/components/helpDialog/rankMathML.png)
+![rankMathML](src/components/helpDialog/rankMathML.png)
 
 | 等级   | 成绩点数 |
 | ---- | ---- |
