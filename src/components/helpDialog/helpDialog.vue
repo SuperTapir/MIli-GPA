@@ -2,18 +2,27 @@
   <div class="helpTeam">
     <i @click="helpDialogVisible = true" class="el-icon-information"></i>
     <el-dialog title="采用算法" v-model="helpDialogVisible" size="large" top="5%">
-      <el-tabs v-model="activeName" type="card">
-        <el-tab-pane label="财大四分制" name="first">
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="标准四分制" name="first">
           <p>
-            <img src="../helpDialog/mathML.png" style="width: 100%; height: auto;max-width: 100%; display: block;">
+            <img src="../helpDialog/standMathML.png" height="93" width="290" class="img-responsive">
+          </p>
+          <el-table :data="gridData.standMethod">
+            <el-table-column property="grade" label="成绩" style="width: 50%"></el-table-column>
+            <el-table-column property="credit" label="绩点" style="width: 50%"></el-table-column>
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="财大四分制" name="second">
+          <p>
+            <img src="../helpDialog/caidaMathML.png" height="44" width="333" class="img-responsive">
           </p>
           <el-table :data="gridData.caidaMethod">
             <el-table-column property="grade" label="成绩" style="width: 50%"></el-table-column>
             <el-table-column property="credit" label="绩点" style="width: 50%"></el-table-column>
           </el-table>
         </el-tab-pane>
-        <el-tab-pane label="等级制" name="second">
-          <img src="../helpDialog/mathML2.png" style="width: 100%; height: auto;max-width: 100%; display: block;">
+        <el-tab-pane label="等级制" name="third">
+          <img src="../helpDialog/rankMathML.png" height="73" width="201" class="img-responsive">
           <el-table :data="gridData.rankMethod">
             <el-table-column property="rank" label="等级" style="width: 50%"></el-table-column>
             <el-table-column property="rankPoint" label="成绩点数" style="width: 50%"></el-table-column>
@@ -34,6 +43,22 @@ export default {
       activeName: 'first',
       helpDialogVisible: false,
       gridData: {
+        standMethod: [{
+          grade: '90 ~ 100',
+          credit: 4
+        }, {
+          grade: '80 ~ 89.9',
+          credit: 3
+        }, {
+          grade: '70 ~ 79.9',
+          credit: 2
+        }, {
+          grade: '60 ~ 69.9',
+          credit: 1
+        }, {
+          grade: '60分以下',
+          credit: 0
+        }],
         caidaMethod: [{
           grade: '90 ~ 100',
           credit: 4
@@ -94,4 +119,5 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .helpTeam
   display inline-block
+  color #8492a6
 </style>

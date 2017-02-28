@@ -8,6 +8,9 @@
           {{ dropdownText }}<i class="el-icon-caret-bottom el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
+          <router-link to="/standMethod">
+            <el-dropdown-item command="标准四分制">标准四分制</el-dropdown-item>
+          </router-link>
           <router-link to="/cadaMethod">
             <el-dropdown-item command="财大四分制">财大四分制</el-dropdown-item>
           </router-link>
@@ -35,7 +38,7 @@ export default {
   },
   data() {
     return {
-      dropdownText: '财大四分制'
+      dropdownText: '标准四分制'
     }
   },
   methods: {

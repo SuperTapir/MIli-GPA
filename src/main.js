@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-default/index.css'
 import App from './App'
 import cadaMethod from 'components/cadaMethod/cadaMethod'
 import rankMethod from 'components/rankMethod/rankMethod'
+import standMethod from 'components/standMethod/standMethod'
 
 import 'common/stylus/index.styl'
 
@@ -16,11 +17,12 @@ Vue.use(ElementUi)
 var router = new VueRouter({
   routes: [
     { path: '/cadaMethod', component: cadaMethod },
-    { path: '/rankMethod', component: rankMethod }
+    { path: '/rankMethod', component: rankMethod },
+    { path: '/standMethod', component: standMethod }
   ],
   linkActiveClass: 'active'
 })
-router.push('/cadaMethod')
+router.push('/standMethod')
 new Vue({
   el: '#app',
   template: '<App/>',
