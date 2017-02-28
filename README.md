@@ -33,29 +33,39 @@ npm run build
 
 ## 当前算法
 
-### 财大四分制
+### 标准四分制
 
- ![mathML](src/components/helpDialog/mathML.png)
-
-
+![standMathML](/Users/kilo/GoogleDerive/Development/Git/MIli-GPA/src/components/helpDialog/standMathML.png)
 
 | 成绩      | 绩点   |
 | ------- | ---- |
-| 90—100分 | 4    |
-| 85—89.9 | 3.7  |
-| 82—84.9 | 3.3  |
-| 78—81.9 | 3    |
-| 75—77.9 | 2.7  |
-| 72—74.9 | 2.3  |
-| 68—71.9 | 2    |
-| 66—67.9 | 1.7  |
-| 64—65.9 | 1.5  |
-| 60—63.9 | 1    |
+| 90~100  | 4    |
+| 80~89.9 | 3    |
+| 70~79.9 | 2    |
+| 60~69.9 | 1    |
+| 60分以下   | 0    |
+
+### 财大四分制
+
+![caidaMathML](/Users/kilo/GoogleDerive/Development/Git/MIli-GPA/src/components/helpDialog/caidaMathML.png)
+
+| 成绩      | 绩点   |
+| ------- | ---- |
+| 90~100  | 4    |
+| 85~89.9 | 3.7  |
+| 82~84.9 | 3.3  |
+| 78~81.9 | 3    |
+| 75~77.9 | 2.7  |
+| 72~74.9 | 2.3  |
+| 68~71.9 | 2    |
+| 66~67.9 | 1.7  |
+| 64~65.9 | 1.5  |
+| 60~63.9 | 1    |
 | 60分以下   | 0    |
 
 ### 等级制
 
-![mathML](src/components/helpDialog/mathML2.png)
+![rankMathML](/Users/kilo/GoogleDerive/Development/Git/MIli-GPA/src/components/helpDialog/rankMathML.png)
 
 | 等级   | 成绩点数 |
 | ---- | ---- |
